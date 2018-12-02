@@ -12,6 +12,7 @@ const byte RELAY_PIN = 4;     ///< outpur relay pin
 const int THRESHOLD_FREQ = 12500; ///< treshlod in Hz
 const int MAX_DEVATION = 100;     ///< max treshold devation
 const int MIN_REPS = 2;           ///< minimal repets with treshold
+const int TIMEOUT = 2500          ///< timeout for mesure frequency
 
 int reps = 0;   ///< repets counter
 
@@ -54,7 +55,7 @@ long getFrequency(int pin) {
   int samples = 4096;
   long retval = 0;
   for(unsigned int j=0; j<samples; j++){
-    retval+= 500000/pulseIn(pin, HIGH, 250000);
+    retval+= 500000/pulseIn(pin, HIGH, TIMEOUT);
   }
   return retval / samples;
 }
