@@ -12,7 +12,7 @@ const byte RELAY_PIN = 4;     ///< outpur relay pin
 const int THRESHOLD_FREQ = 12500; ///< treshlod in Hz
 const int MAX_DEVATION = 100;     ///< max treshold devation
 const int MIN_REPS = 2;           ///< minimal repets with treshold
-const int TIMEOUT = 2500          ///< timeout for mesure frequency
+const int TIMEOUT = 2500;          ///< timeout for mesure frequency
 
 int reps = 0;   ///< repets counter
 
@@ -23,6 +23,7 @@ void setup() {
   pinMode(MEASURE_PIN, INPUT);
   pinMode(RELAY_PIN, OUTPUT);
   digitalWrite(RELAY_PIN, LOW);
+  Serial.begin(9600);
 }
 
  /**
@@ -30,6 +31,7 @@ void setup() {
  */
 void loop() {
   long freq = getFrequency(MEASURE_PIN);
+  Serial.println(freq);
   
   if ( freq > (THRESHOLD_FREQ - MAX_DEVATION) && freq < (THRESHOLD_FREQ + MAX_DEVATION) ){
     reps ++;
