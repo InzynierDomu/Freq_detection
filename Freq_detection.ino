@@ -6,8 +6,11 @@
  * @date 12-2018
  */
 
+#define DEBUG;    ///< debug flag
+
 const byte MEASURE_PIN = 3;   ///< pin for measure signal
 const byte RELAY_PIN = 4;     ///< outpur relay pin
+const int  BAUDRATE = 9600;   ///< Serial baudrate
 
 const int THRESHOLD_FREQ = 12500; ///< treshlod in Hz
 const int MAX_DEVATION = 100;     ///< max treshold devation
@@ -23,7 +26,9 @@ void setup() {
   pinMode(MEASURE_PIN, INPUT);
   pinMode(RELAY_PIN, OUTPUT);
   digitalWrite(RELAY_PIN, LOW);
-  Serial.begin(9600);
+#ifdef DEBUG
+  Serial.begin(BAUDRATE);
+#endif    
 }
 
  /**
@@ -31,7 +36,9 @@ void setup() {
  */
 void loop() {
   long freq = getFrequency(MEASURE_PIN);
+#ifdef DEBUG  
   Serial.println(freq);
+#endif
   
   if ( freq > (THRESHOLD_FREQ - MAX_DEVATION) && freq < (THRESHOLD_FREQ + MAX_DEVATION) ){
     reps ++;
@@ -56,8 +63,9 @@ void loop() {
 long getFrequency(int pin) {
   int samples = 4096;
   long retval = 0;
+  int half_second_us = 500000;
   for(unsigned int j=0; j<samples; j++){
-    retval+= 500000/pulseIn(pin, HIGH, TIMEOUT);
+    retval+= half_second_us/pulseIn(pin, HIGH, TIMEOUT);
   }
   return retval / samples;
 }
