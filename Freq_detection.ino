@@ -6,7 +6,7 @@
  * @date 12-2018
  */
 
-#define DEBUG;    ///< debug flag
+//#define DEBUG;    ///< debug flag
 
 const byte MEASURE_PIN = 3;   ///< pin for measure signal
 const byte RELAY_PIN = 4;     ///< outpur relay pin
