@@ -63,7 +63,7 @@ void loop() {
 long getFrequency(int pin) {
   int samples = 4096;
   long retval = 0;
-  int half_second_us = 500000;
+  long half_second_us = 500000.0;
   for(unsigned int j=0; j<samples; j++){
     retval+= half_second_us/pulseIn(pin, HIGH, TIMEOUT);
   }
