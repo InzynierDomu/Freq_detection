@@ -9,7 +9,7 @@
 //#define DEBUG;    ///< debug flag
 //#define USE_ANSI_ESCAPE_CODES  ///< turn on coloring text
 
-#if defined(USE_ANSI_ESCAPE_CODES) && defined(DEBUG && USE_ANSI_ESCAPE_CODES)
+#if defined(USE_ANSI_ESCAPE_CODES) && defined(DEBUG)
 const char* const ANSI_RED    = "\033[31m";
 const char* const ANSI_GREEN  = "\033[32m";
 const char* const ANSI_YELLOW = "\033[33m";
@@ -56,12 +56,10 @@ void loop() {
   if ( freq > (THRESHOLD_FREQ - MAX_DEVATION) && freq < (THRESHOLD_FREQ + MAX_DEVATION) ){
     // freq in range [12401..12599] shows in green color
     Serial.print(ANSI_GREEN);
-    Serial.print(freq);
   } else {
-    // green
     Serial.print(ANSI_RED);
-    Serial.print(freq);
   }
+  Serial.print(freq);
   Serial.println(ANSI_RESET);
   #else
     Serial.println(freq);
