@@ -42,17 +42,13 @@ void loop() {
   
   if ( freq > (THRESHOLD_FREQ - MAX_DEVATION) && freq < (THRESHOLD_FREQ + MAX_DEVATION) ){
     reps ++;
-  }
-  else{
+    if (reps >= MIN_REPS){
+      digitalWrite(RELAY_PIN, HIGH);
+    }
+  }else{
     reps = 0;
-  }
-
-  if (reps >= MIN_REPS){
-    digitalWrite(RELAY_PIN, HIGH);
-  }
-  else{
     digitalWrite(RELAY_PIN, LOW);
-  }
+  }   
 }
 
  /**
